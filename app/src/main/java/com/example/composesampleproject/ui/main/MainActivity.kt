@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import com.example.composesampleproject.data.model.Puppy
 import com.example.composesampleproject.ui.MainContent
+import com.example.composesampleproject.ui.profile.ProfileActivity
 import com.example.composesampleproject.ui.theme.ComposeSampleProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,17 +15,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeSampleProjectTheme {
-                MainApp()
+                MainApp {
+                    startActivity(ProfileActivity.newIntent(this, it))
+                }
             }
         }
     }
 }
 
 @Composable
-fun MainApp() {
+fun MainApp(navigateToProfile: (Puppy) -> Unit) {
     Scaffold (
         content = {
-            MainContent()
+            MainContent(navigateToProfile)
         }
     )
 }

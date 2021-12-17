@@ -1,6 +1,7 @@
 package com.example.composesampleproject.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.example.composesampleproject.data.model.Puppy
 
 @Composable
-fun PuppyListItem(puppy: Puppy) {
+fun PuppyListItem(puppy: Puppy, navigateToProfile: (Puppy) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -26,7 +27,7 @@ fun PuppyListItem(puppy: Puppy) {
         elevation = 2.dp,
         shape = RoundedCornerShape(corner = CornerSize(16.dp))
     ) {
-        Row {
+        Row(modifier = Modifier.clickable { navigateToProfile(puppy) }) {
             PuppyImage(puppy = puppy)
             Column(
                 modifier = Modifier
